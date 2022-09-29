@@ -4,7 +4,7 @@ using System;
 using data;
 using Algorithms;
 
-List<Book> catalogue = new List<Book>();
+List<Book> catalogue = new List<Book> { new Book("The Lightning Thief (Percy Jackson and the Olympians, Book 1)", "Riordan, Rick", "0786856297", "Fiction", "Greek Mythology", "Fantasy")};
 
 while (true)
 {
@@ -14,11 +14,16 @@ while (true)
     );
     string option = Console.ReadLine();
 
-    if (option == "1") {
+    if (option == "1")
+    {
         Console.WriteLine("Option 1");
-    } else if (option == "2") {
+    }
+    else if (option == "2")
+    {
         break;
-    } else {
+    }
+    else
+    {
         Console.WriteLine("Invalid entry");
     }
 }
