@@ -3,7 +3,7 @@ namespace Algorithms
     public static class Search
     {
         // Linear Search
-        public static int linearSearch(int[] anArray, int item)
+        public static int linear(int[] anArray, int item)
         {
             for (int i = 0; i < anArray.Length; i++)
             {
@@ -15,7 +15,7 @@ namespace Algorithms
             return -1;
         }
 
-        public static int linearSearch(string[] anArray, string item)
+        public static int linear(string[] anArray, string item)
         {
             for (int i = 0; i < anArray.Length; i++)
             {
@@ -28,7 +28,7 @@ namespace Algorithms
         }
 
         // Binary Search
-        public static int binarySearch(int[] anArray, int item)
+        public static int binary(int[] anArray, int item)
         {
             int beg = 0;
             int end = anArray.Length - 1;
@@ -53,7 +53,7 @@ namespace Algorithms
             return -1;
         }
 
-        public static int binarySearch(string[] anArray, string item)
+        public static int binary(string[] anArray, string item)
         {
             int beg = 0;
             int end = anArray.Length - 1;
@@ -83,7 +83,7 @@ namespace Algorithms
     public static class Sort
     {
         // Bubble Sort
-        public static void bubbleSort(int[] anArray)
+        public static void bubble(int[] anArray)
         {
             for (int i = anArray.Length - 1; i > 0; i--)
             {
@@ -99,7 +99,7 @@ namespace Algorithms
             }
         }
 
-        public static void bubbleSort(string[] anArray)
+        public static void bubble(string[] anArray)
         {
             for (int i = anArray.Length - 1; i > 0; i--)
             {
@@ -117,7 +117,7 @@ namespace Algorithms
         }
 
         // Selection Sort
-        public static void selectionSort(int[] anArray)
+        public static void selection(int[] anArray)
         {
             int minPos;
             int arrLength = anArray.Length;
@@ -137,7 +137,7 @@ namespace Algorithms
             }
         }
 
-        public static void selectionSort(string[] anArray)
+        public static void selection(string[] anArray)
         {
             int minPos;
             int arrLength = anArray.Length;
@@ -159,7 +159,7 @@ namespace Algorithms
         }
 
         // Insertion Sort
-        public static void insertSort(int[] anArray)
+        public static void insertion(int[] anArray)
         {
             int insertPos,
                 insertVal;
@@ -177,7 +177,7 @@ namespace Algorithms
             }
         }
 
-        public static void insertSort(string[] anArray)
+        public static void insertion(string[] anArray)
         {
             int insertPos;
             string insertVal;
