@@ -1,0 +1,38 @@
+[
+  {
+    "Name": "kratos",
+    "Affiliation": "god of war",
+    "Classification": "demigod",
+    "Abilities": ["superhuman strength", "invulnerability"]
+  },
+  {
+    "Name": "thor",
+    "Affiliation": "god of war",
+    "Classification": "god",
+    "Abilities": ["superhuman strength", "mjolnir"]
+  },
+  {
+    "Name": "ezio auditore",
+    "Affiliation": "assassin's creed",
+    "Classification": "assassin",
+    "Abilities": ["stealth", "eagle vision"]
+  },
+  {
+    "Name": "haytham kenway",
+    "Affiliation": "assassin's creed",
+    "Classification": "templar",
+    "Abilities": ["stealth", "eagle vision"]
+  },
+  {
+    "Name": "luigi",
+    "Affiliation": "mario",
+    "Classification": "human",
+    "Abilities": ["superhuman strength", "pyrokinesis"]
+  },
+  {
+    "Name": "bowser",
+    "Affiliation": "mario",
+    "Classification": "koopa",
+    "Abilities": ["fire breath", "dark magic"]
+  }
+]

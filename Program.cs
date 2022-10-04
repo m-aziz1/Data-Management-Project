@@ -6,15 +6,14 @@ using Algorithms;
 using System.Text.Json;
 
 Console.Clear();
+#nullable disable
 
 List<User> users = new List<User>();
+List<Character> catalogue = new List<Character>();
 
-List<Character> catalogue = new List<Character>
-{
-    new Character("kratos", "god of war", "god", "superhuman strength", "invulnerability"),
-    new Character("ezio auditore", "assassin's creed", "assassin", "stealth", "pickpocketing"),
-    new Character("thor", "norse mythology", "god", "superhuman strength", "mjolnir")
-};
+string fileName = "character-list.json";
+string jsonString = File.ReadAllText(fileName);
+catalogue = JsonSerializer.Deserialize<List<Character>>(jsonString)!;
 
 while (true)
 {

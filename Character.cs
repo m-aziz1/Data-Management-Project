@@ -5,19 +5,19 @@ namespace data
         public string Name { get; set; }
         public string Affiliation { get; set; }
         public string Classification { get; set; }
-        public List<string> Abilities { get; set; }
+        public string[] Abilities { get; set; }
 
         public Character(
             string name,
             string affiliation,
             string Classification,
-            params string[] abilities
+            string[] abilities
         )
         {
             this.Name = name;
             this.Affiliation = affiliation;
             this.Classification = Classification;
-            this.Abilities = abilities.ToList();
+            this.Abilities = abilities;
         }
 
         public void printProperties()
