@@ -15,6 +15,30 @@ string fileName = "character-list.json";
 string jsonString = File.ReadAllText(fileName);
 catalogue = JsonSerializer.Deserialize<List<Character>>(jsonString)!;
 
+// LOGIN
+Console.WriteLine("Welcome! \n1. Login to Existing user\n2. Create New User");
+string optLogin = Console.ReadLine();
+if (optLogin == "1")
+{
+    Console.Write("Enter New Username: ");
+    string username = Console.ReadLine();
+    Console.Write("Enter New Password: ");
+    string password = Console.ReadLine();
+    // ---make validate function
+    for (int i = 0; i < users.Count(); i++) {
+
+    }
+}
+else if (optLogin == "2")
+{
+
+}
+else
+{
+    Console.WriteLine("---\nInvalid entry\n---");
+}
+
+// MAIN LOOP
 while (true)
 {
     Console.ForegroundColor = ConsoleColor.White;
@@ -22,16 +46,16 @@ while (true)
     Console.WriteLine(
         "1. Display All data\n2. Filter Data\n3. Sort Alphabetically\n4. Add To Favourites\n5. Remove from Favourites\n6. Display Favourites\n7. Exit"
     );
-    string option = Console.ReadLine();
+    string optMenu = Console.ReadLine();
 
-    if (option == "1")
+    if (optMenu == "1")
     {
         // Display All Data
         Console.WriteLine("---");
         Console.ForegroundColor = ConsoleColor.Yellow;
         printList(catalogue);
     }
-    else if (option == "2")
+    else if (optMenu == "2")
     {
         // Filter Data
         Console.WriteLine("---");
@@ -76,7 +100,7 @@ while (true)
             Console.WriteLine("Invalid selection");
         }
     }
-    else if (option == "3")
+    else if (optMenu == "3")
     {
         // Sort by Character Name
         Console.WriteLine("---");
@@ -84,10 +108,13 @@ while (true)
         insertionSortName(catalogue);
         printList(catalogue);
     }
-    else if (option == "4") { }
-    else if (option == "5") { }
-    else if (option == "6") { }
-    else if (option == "7")
+    else if (optMenu == "4")
+    {
+
+    }
+    else if (optMenu == "5") { }
+    else if (optMenu == "6") { }
+    else if (optMenu == "7")
     {
         Console.ForegroundColor = ConsoleColor.White;
         break;

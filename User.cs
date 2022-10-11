@@ -17,5 +17,10 @@ namespace data
         {
             this.Faves.Add(item);
         }
+
+        public void removeFave(Character item)
+        {
+            this.Faves.Remove(item);
+        }
     }
 }
