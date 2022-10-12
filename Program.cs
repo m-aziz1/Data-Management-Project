@@ -8,7 +8,7 @@ using System.Text.Json;
 Console.Clear();
 #nullable disable
 
-List<User> users = new List<User>();
+List<User> users = new List<User>() { new User("bob", "lunchman1") };
 List<Character> catalogue = new List<Character>();
 
 string fileName = "character-list.json";
@@ -20,22 +20,50 @@ Console.WriteLine("Welcome! \n1. Login to Existing user\n2. Create New User");
 string optLogin = Console.ReadLine();
 if (optLogin == "1")
 {
-    Console.Write("Enter New Username: ");
-    string username = Console.ReadLine();
-    Console.Write("Enter New Password: ");
-    string password = Console.ReadLine();
-    // ---make validate function
-    for (int i = 0; i < users.Count(); i++) {
+    while (true)
+    {
+        Console.Write("Enter Username: ");
+        string username = Console.ReadLine();
 
+        // Break loop if user exists
+        int userInd = checkExistingUser(username);
+        if (userInd > -1)
+        {
+            Console.Write("Enter Password: ");
+            string password = Console.ReadLine();
+            if (users[userInd].Password == password)
+            {
+                Console.WriteLine("Logged in!");
+                break;
+            }
+            Console.WriteLine("---\nPassword Incorrect\n---");
+        }
+
+        Console.WriteLine("---\nUser Does Not Exist\n---");
     }
 }
 else if (optLogin == "2")
 {
+    while (true)
+    {
+        Console.Write("Enter New Username: ");
+        string username = Console.ReadLine();
 
+        // Break loop if user does not exist
+        if (checkExistingUser(username) < 0)
+        {
+            Console.Write("Enter New Password: ");
+            string password = Console.ReadLine();
+            users.Add(new User(username, password));
+            Console.WriteLine("Account Created!");
+            break;
+        }
+        Console.WriteLine("---\nUsername is Taken\n---");
+    }
 }
 else
 {
-    Console.WriteLine("---\nInvalid entry\n---");
+    Console.WriteLine("---\nInvalid Entry\n---");
 }
 
 // MAIN LOOP
@@ -127,6 +155,18 @@ while (true)
 }
 
 // FUNCTIONS
+int checkExistingUser(string username)
+{
+    for (int i = 0; i < users.Count(); i++)
+    {
+        if (users[i].Username == username)
+        {
+            return i;
+        }
+    }
+
+    return -1;
+}
 
 void insertionSortName(List<Character> aList)
 {
