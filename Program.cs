@@ -9,6 +9,7 @@ Console.Clear();
 #nullable disable
 
 List<User> users = new List<User>() { new User("bob", "lunchman1") };
+User currentUser;
 List<Character> catalogue = new List<Character>();
 
 string fileName = "character-list.json";
@@ -34,11 +35,11 @@ if (optLogin == "1")
             if (users[userInd].Password == password)
             {
                 Console.WriteLine("Logged in!");
+                currentUser = users[userInd];
                 break;
             }
             Console.WriteLine("---\nPassword Incorrect\n---");
         }
-
         Console.WriteLine("---\nUser Does Not Exist\n---");
     }
 }
