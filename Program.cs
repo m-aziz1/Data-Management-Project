@@ -4,12 +4,11 @@ using System;
 using data;
 using Algorithms;
 using System.Text.Json;
-
-Console.Clear();
 #nullable disable
 
+
+Console.Clear();
 List<User> users = new List<User>() { new User("bob", "lunchman1") };
-User currentUser;
 List<Character> catalogue = new List<Character>();
 
 string fileName = "character-list.json";
@@ -35,8 +34,8 @@ if (optLogin == "1")
             if (users[userInd].Password == password)
             {
                 Console.WriteLine("Logged in!");
-                currentUser = users[userInd];
                 break;
+                mainLoop(users[userInd]);
             }
             Console.WriteLine("---\nPassword Incorrect\n---");
         }
@@ -68,92 +67,99 @@ else
 }
 
 // MAIN LOOP
-while (true)
+void mainLoop(User currentUser)
 {
-    Console.ForegroundColor = ConsoleColor.White;
-    Console.WriteLine("---|Muhammad's Library|--- ");
-    Console.WriteLine(
-        "1. Display All data\n2. Filter Data\n3. Sort Alphabetically\n4. Add To Favourites\n5. Remove from Favourites\n6. Display Favourites\n7. Exit"
-    );
-    string optMenu = Console.ReadLine();
-
-    if (optMenu == "1")
+    while (true)
     {
-        // Display All Data
-        Console.WriteLine("---");
-        Console.ForegroundColor = ConsoleColor.Yellow;
-        printList(catalogue);
-    }
-    else if (optMenu == "2")
-    {
-        // Filter Data
-        Console.WriteLine("---");
-        Console.ForegroundColor = ConsoleColor.Yellow;
-        Console.Write("Filter by (1 - Affiliation, 2 - Classification): ");
-        string filterType = Console.ReadLine();
+        Console.ForegroundColor = ConsoleColor.White;
+        Console.WriteLine("---|Muhammad's Library|--- ");
+        Console.WriteLine(
+            "1. Display All data\n2. Filter Data\n3. Sort Alphabetically\n4. Add To Favourites\n5. Remove from Favourites\n6. Display Favourites\n7. Exit"
+        );
+        string optMenu = Console.ReadLine();
 
-        if (filterType == "1")
+        if (optMenu == "1")
         {
-            Console.Write("Affiliation: ");
-            string filter = Console.ReadLine().ToLower();
-            int resultCount = 0;
+            // Display All Data
+            Console.WriteLine("---");
+            Console.ForegroundColor = ConsoleColor.Yellow;
+            printList(catalogue);
+        }
+        else if (optMenu == "2")
+        {
+            // Filter Data
+            Console.WriteLine("---");
+            Console.ForegroundColor = ConsoleColor.Yellow;
+            Console.Write("Filter by (1 - Affiliation, 2 - Classification): ");
+            string filterType = Console.ReadLine();
 
-            for (int i = 0; i < catalogue.Count(); i++)
+            if (filterType == "1")
             {
-                resultCount += catalogue[i].checkAffiliation(filter);
+                Console.Write("Affiliation: ");
+                string filter = Console.ReadLine().ToLower();
+                int resultCount = 0;
+
+                for (int i = 0; i < catalogue.Count(); i++)
+                {
+                    resultCount += catalogue[i].checkAffiliation(filter);
+                }
+
+                if (resultCount < 1)
+                {
+                    Console.WriteLine("No results found");
+                }
             }
-
-            if (resultCount < 1)
+            else if (filterType == "2")
             {
-                Console.WriteLine("No results found");
+                Console.Write("Classification: ");
+                string filter = Console.ReadLine().ToLower();
+                int resultCount = 0;
+
+                for (int i = 0; i < catalogue.Count(); i++)
+                {
+                    resultCount += catalogue[i].checkClassification(filter);
+                }
+
+                if (resultCount < 1)
+                {
+                    Console.WriteLine("No results found");
+                }
+            }
+            else
+            {
+                Console.WriteLine("Invalid selection");
             }
         }
-        else if (filterType == "2")
+        else if (optMenu == "3")
         {
-            Console.Write("Classification: ");
-            string filter = Console.ReadLine().ToLower();
-            int resultCount = 0;
+            // Sort by Character Name
+            Console.WriteLine("---");
+            Console.ForegroundColor = ConsoleColor.Yellow;
+            insertionSortName(catalogue);
+            printList(catalogue);
+        }
+        else if (optMenu == "4")
+        {
 
-            for (int i = 0; i < catalogue.Count(); i++)
-            {
-                resultCount += catalogue[i].checkClassification(filter);
-            }
-
-            if (resultCount < 1)
-            {
-                Console.WriteLine("No results found");
-            }
+        }
+        else if (optMenu == "5")
+        {
+            Console.WriteLine($"{currentUser}");
+        }
+        else if (optMenu == "6") { }
+        else if (optMenu == "7")
+        {
+            Console.ForegroundColor = ConsoleColor.White;
+            break;
         }
         else
         {
-            Console.WriteLine("Invalid selection");
+            Console.ForegroundColor = ConsoleColor.Yellow;
+            Console.WriteLine("---\nInvalid entry\n---");
         }
     }
-    else if (optMenu == "3")
-    {
-        // Sort by Character Name
-        Console.WriteLine("---");
-        Console.ForegroundColor = ConsoleColor.Yellow;
-        insertionSortName(catalogue);
-        printList(catalogue);
-    }
-    else if (optMenu == "4")
-    {
-
-    }
-    else if (optMenu == "5") { }
-    else if (optMenu == "6") { }
-    else if (optMenu == "7")
-    {
-        Console.ForegroundColor = ConsoleColor.White;
-        break;
-    }
-    else
-    {
-        Console.ForegroundColor = ConsoleColor.Yellow;
-        Console.WriteLine("---\nInvalid entry\n---");
-    }
 }
+
 
 // FUNCTIONS
 int checkExistingUser(string username)
