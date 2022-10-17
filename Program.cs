@@ -33,9 +33,10 @@ if (optLogin == "1")
             string password = Console.ReadLine();
             if (users[userInd].Password == password)
             {
+                Console.Clear();
                 Console.WriteLine("Logged in!");
-                break;
                 mainLoop(users[userInd]);
+                break;
             }
             Console.WriteLine("---\nPassword Incorrect\n---");
         }
@@ -55,7 +56,9 @@ else if (optLogin == "2")
             Console.Write("Enter New Password: ");
             string password = Console.ReadLine();
             users.Add(new User(username, password));
+            Console.Clear();
             Console.WriteLine("Account Created!");
+            mainLoop(users[users.Count() - 1]);
             break;
         }
         Console.WriteLine("---\nUsername is Taken\n---");
@@ -140,11 +143,25 @@ void mainLoop(User currentUser)
         }
         else if (optMenu == "4")
         {
-
+            Console.WriteLine("---");
+            Console.ForegroundColor = ConsoleColor.Yellow;
+            Console.Write("Enter name of character: ");
+            string charName = Console.ReadLine().ToLower();
+            for (int i = 0; i < catalogue.Count(); i++)
+            {
+                if (catalogue[i].Name == charName)
+                {
+                    if (currentUser.Faves.Contains(catalogue[i]) == false)
+                    {
+                        currentUser.addFave(catalogue[i]);
+                        Console.WriteLine("Added to favourites!");
+                    }
+                }
+            }
         }
         else if (optMenu == "5")
         {
-            Console.WriteLine($"{currentUser}");
+            Console.WriteLine($"{currentUser.Username}");
         }
         else if (optMenu == "6") { }
         else if (optMenu == "7")

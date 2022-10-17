@@ -26,9 +26,9 @@ namespace data
                 $"Name: {this.Name}\nAffiliation: {this.Affiliation}\nClassification: {this.Classification}"
             );
             Console.Write("Abilities: ");
-            for (int j = 0; j < this.Abilities.Count(); j++)
+            for (int i = 0; i < this.Abilities.Count(); i++)
             {
-                Console.Write($"{this.Abilities[j]}, ");
+                Console.Write($"{this.Abilities[i]}, ");
             }
             Console.Write("\n|\n");
         }

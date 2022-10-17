@@ -24,15 +24,27 @@
     "Abilities": ["stealth", "eagle vision"]
   },
   {
-    "Name": "luigi",
-    "Affiliation": "mario",
+    "Name": "mario",
+    "Affiliation": "mario series",
     "Classification": "human",
     "Abilities": ["superhuman strength", "pyrokinesis"]
   },
   {
     "Name": "bowser",
-    "Affiliation": "mario",
+    "Affiliation": "mario series",
     "Classification": "koopa",
     "Abilities": ["fire breath", "dark magic"]
+  },
+  {
+    "Name": "steve",
+    "Affiliation": "minecraft",
+    "Classification": "human",
+    "Abilities": ["superhuman strength", "infinite pockets"]
+  },
+  {
+    "Name": "ender dragon",
+    "Affiliation": "minecraft",
+    "Classification": "dragon",
+    "Abilities": ["regeneration", "dragon's breath"]
   }
 ]
