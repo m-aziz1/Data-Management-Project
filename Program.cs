@@ -11,9 +11,14 @@ Console.Clear();
 List<User> users = new List<User>() { new User("bob", "lunchman1") };
 List<Character> catalogue = new List<Character>();
 
+// Deserialize
 string fileName = "character-list.json";
 string jsonString = File.ReadAllText(fileName);
 catalogue = JsonSerializer.Deserialize<List<Character>>(jsonString)!;
+
+// string fileName = "character-list.json";
+// string jsonString = File.ReadAllText(fileName);
+// catalogue = JsonSerializer.Deserialize<List<Character>>(jsonString)!;
 
 // LOGIN
 Console.WriteLine("Welcome! \n1. Login to Existing user\n2. Create New User");
@@ -75,7 +80,7 @@ void mainLoop(User currentUser)
     while (true)
     {
         Console.ForegroundColor = ConsoleColor.White;
-        Console.WriteLine("---|Muhammad's Library|--- ");
+        Console.WriteLine($"---|Welcome, {currentUser.Username}!|--- ");
         Console.WriteLine(
             "1. Display All data\n2. Filter Data\n3. Sort Alphabetically\n4. Add To Favourites\n5. Remove from Favourites\n6. Display Favourites\n7. Exit"
         );
@@ -98,6 +103,7 @@ void mainLoop(User currentUser)
 
             if (filterType == "1")
             {
+                // Filter by Affiliation
                 Console.Write("Affiliation: ");
                 string filter = Console.ReadLine().ToLower();
                 int resultCount = 0;
@@ -114,6 +120,7 @@ void mainLoop(User currentUser)
             }
             else if (filterType == "2")
             {
+                // Filter by Classification
                 Console.Write("Classification: ");
                 string filter = Console.ReadLine().ToLower();
                 int resultCount = 0;
@@ -143,6 +150,7 @@ void mainLoop(User currentUser)
         }
         else if (optMenu == "4")
         {
+            // Add to Favourites
             Console.WriteLine("---");
             Console.ForegroundColor = ConsoleColor.Yellow;
             Console.Write("Enter name of character: ");
@@ -161,12 +169,33 @@ void mainLoop(User currentUser)
         }
         else if (optMenu == "5")
         {
-            Console.WriteLine($"{currentUser.Username}");
+            // Add to Favourites
+            Console.WriteLine("---");
+            Console.ForegroundColor = ConsoleColor.Yellow;
+            Console.Write("Enter name of character: ");
+            string charName = Console.ReadLine().ToLower();
+            for (int i = 0; i < currentUser.Faves.Count(); i++)
+            {
+                if (currentUser.Faves[i].Name == charName)
+                {
+                    currentUser.Faves.RemoveAt(i);
+                    Console.WriteLine("Removed from favourites list");
+                }
+            }
         }
-        else if (optMenu == "6") { }
+        else if (optMenu == "6")
+        {
+            // Print Favourites List
+            Console.WriteLine("---");
+            Console.ForegroundColor = ConsoleColor.Yellow;
+            printList(currentUser.Faves);
+        }
         else if (optMenu == "7")
         {
             Console.ForegroundColor = ConsoleColor.White;
+            string fileName = "users.json";
+            string jsonString = JsonSerializer.Serialize(users);
+            File.WriteAllText(fileName, jsonString);
             break;
         }
         else
@@ -212,8 +241,8 @@ void insertionSortName(List<Character> aList)
 
 void printList(List<Character> aList)
 {
-    for (int i = 0; i < catalogue.Count(); i++)
+    for (int i = 0; i < aList.Count(); i++)
     {
-        catalogue[i].printProperties();
+        aList[i].printProperties();
     }
 }

@@ -1,0 +1,20 @@
+[
+  {
+    "Username": "bob",
+    "Password": "lunchman1",
+    "Faves": [
+      {
+        "Name": "steve",
+        "Affiliation": "minecraft",
+        "Classification": "human",
+        "Abilities": ["superhuman strength", "infinite pockets"]
+      },
+      {
+        "Name": "kratos",
+        "Affiliation": "god of war",
+        "Classification": "demigod",
+        "Abilities": ["superhuman strength", "invulnerability"]
+      }
+    ]
+  }
+]
