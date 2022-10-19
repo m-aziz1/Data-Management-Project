@@ -6,11 +6,11 @@ namespace data
         public string Password { get; set; }
         public List<Character> Faves { get; set; }
 
-        public User(string username, string password)
+        public User(string username, string password, List<Character> faves)
         {
             this.Username = username;
             this.Password = password;
-            this.Faves = new List<Character>();
+            this.Faves = faves;
         }
 
         public void addFave(Character item)

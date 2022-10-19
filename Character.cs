@@ -7,12 +7,7 @@ namespace data
         public string Classification { get; set; }
         public string[] Abilities { get; set; }
 
-        public Character(
-            string name,
-            string affiliation,
-            string Classification,
-            string[] abilities
-        )
+        public Character(string name, string affiliation, string Classification, string[] abilities)
         {
             this.Name = name;
             this.Affiliation = affiliation;
@@ -43,7 +38,7 @@ namespace data
             return 0;
         }
 
-          public int checkClassification(string item)
+        public int checkClassification(string item)
         {
             if (this.Classification == item)
             {

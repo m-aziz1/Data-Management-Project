@@ -2,17 +2,15 @@
 
 using System;
 using data;
-using Algorithms;
 using System.Text.Json;
 #nullable disable
-
 
 Console.Clear();
 List<User> users = deserializeJsonUsers("users.json");
 List<Character> catalogue = deserializeJsonCharacters("character-list.json");
 
 // LOGIN
-Console.WriteLine("Welcome! \n1. Login to Existing user\n2. Create New User");
+Console.WriteLine("Welcome! \n1. Login to Existing User\n2. Create New User");
 string optLogin = Console.ReadLine();
 if (optLogin == "1")
 {
@@ -51,7 +49,7 @@ else if (optLogin == "2")
         {
             Console.Write("Enter New Password: ");
             string password = Console.ReadLine();
-            users.Add(new User(username, password));
+            users.Add(new User(username, password, new List<Character>()));
             Console.Clear();
             Console.WriteLine("Account Created!");
             mainLoop(users[users.Count() - 1]);
@@ -146,15 +144,18 @@ void mainLoop(User currentUser)
             Console.ForegroundColor = ConsoleColor.Yellow;
             Console.Write("Enter name of character: ");
             string charName = Console.ReadLine().ToLower();
-            for (int i = 0; i < catalogue.Count(); i++)
+            int charInd = searchName(catalogue, charName);
+            if (charInd > -1)
             {
-                if (catalogue[i].Name == charName)
+                // Add to Favourites if Character is not Already Added
+                if (searchName(currentUser.Faves, charName) < 0)
                 {
-                    if (currentUser.Faves.Contains(catalogue[i]) == false)
-                    {
-                        currentUser.addFave(catalogue[i]);
-                        Console.WriteLine("Added to favourites!");
-                    }
+                    currentUser.addFave(catalogue[charInd]);
+                    Console.WriteLine("Added to favourites");
+                }
+                else
+                {
+                    Console.WriteLine("Character is already in favourites");
                 }
             }
         }
@@ -165,13 +166,16 @@ void mainLoop(User currentUser)
             Console.ForegroundColor = ConsoleColor.Yellow;
             Console.Write("Enter name of character: ");
             string charName = Console.ReadLine().ToLower();
-            for (int i = 0; i < currentUser.Faves.Count(); i++)
+            int charInd = searchName(currentUser.Faves, charName);
+            if (charInd > -1)
             {
-                if (currentUser.Faves[i].Name == charName)
-                {
-                    currentUser.Faves.RemoveAt(i);
-                    Console.WriteLine("Removed from favourites list");
-                }
+                // Remove From Favourites if Character is Found
+                currentUser.Faves.RemoveAt(charInd);
+                Console.WriteLine("Removed from favourites");
+            }
+            else
+            {
+                Console.WriteLine("Character does not exist in favourites");
             }
         }
         else if (optMenu == "6")
@@ -185,9 +189,8 @@ void mainLoop(User currentUser)
         {
             // Exit
             Console.ForegroundColor = ConsoleColor.White;
-            string fileName = "users.json";
             string jsonString = JsonSerializer.Serialize(users);
-            File.WriteAllText(fileName, jsonString);
+            File.WriteAllText("users.json", jsonString);
             break;
         }
         else
@@ -198,7 +201,6 @@ void mainLoop(User currentUser)
         }
     }
 }
-
 
 // FUNCTIONS
 int checkExistingUser(string username)
@@ -211,6 +213,18 @@ int checkExistingUser(string username)
         }
     }
 
+    return -1;
+}
+
+int searchName(List<Character> aList, string charName)
+{
+    for (int i = 0; i < aList.Count(); i++)
+    {
+        if (aList[i].Name == charName)
+        {
+            return i;
+        }
+    }
     return -1;
 }
 
