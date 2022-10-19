@@ -8,17 +8,8 @@ using System.Text.Json;
 
 
 Console.Clear();
-List<User> users = new List<User>() { new User("bob", "lunchman1") };
-List<Character> catalogue = new List<Character>();
-
-// Deserialize
-string fileName = "character-list.json";
-string jsonString = File.ReadAllText(fileName);
-catalogue = JsonSerializer.Deserialize<List<Character>>(jsonString)!;
-
-// string fileName = "character-list.json";
-// string jsonString = File.ReadAllText(fileName);
-// catalogue = JsonSerializer.Deserialize<List<Character>>(jsonString)!;
+List<User> users = deserializeJsonUsers("users.json");
+List<Character> catalogue = deserializeJsonCharacters("character-list.json");
 
 // LOGIN
 Console.WriteLine("Welcome! \n1. Login to Existing user\n2. Create New User");
@@ -169,7 +160,7 @@ void mainLoop(User currentUser)
         }
         else if (optMenu == "5")
         {
-            // Add to Favourites
+            // Remove from Favourites
             Console.WriteLine("---");
             Console.ForegroundColor = ConsoleColor.Yellow;
             Console.Write("Enter name of character: ");
@@ -192,6 +183,7 @@ void mainLoop(User currentUser)
         }
         else if (optMenu == "7")
         {
+            // Exit
             Console.ForegroundColor = ConsoleColor.White;
             string fileName = "users.json";
             string jsonString = JsonSerializer.Serialize(users);
@@ -200,6 +192,7 @@ void mainLoop(User currentUser)
         }
         else
         {
+            // Invalid Entries
             Console.ForegroundColor = ConsoleColor.Yellow;
             Console.WriteLine("---\nInvalid entry\n---");
         }
@@ -245,4 +238,16 @@ void printList(List<Character> aList)
     {
         aList[i].printProperties();
     }
+}
+
+List<Character> deserializeJsonCharacters(string fileName)
+{
+    string jsonString = File.ReadAllText(fileName);
+    return JsonSerializer.Deserialize<List<Character>>(jsonString)!;
+}
+
+List<User> deserializeJsonUsers(string fileName)
+{
+    string jsonString = File.ReadAllText(fileName);
+    return JsonSerializer.Deserialize<List<User>>(jsonString)!;
 }

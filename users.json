@@ -16,5 +16,17 @@
         "Abilities": ["superhuman strength", "invulnerability"]
       }
     ]
+  },
+  {
+    "Username": "ihsa",
+    "Password": "aziz",
+    "Faves": [
+      {
+        "Name": "kratos",
+        "Affiliation": "god of war",
+        "Classification": "demigod",
+        "Abilities": ["superhuman strength", "invulnerability"]
+      }
+    ]
   }
 ]
